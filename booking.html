@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now - Raymells Car Hire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>Raymells Car Hire</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cars.html">Our Cars</a></li>
+                    <li><a href="booking.html" class="active">Book Now</a></li>
+                    <li><a href="tracking.html">Track Car</a></li>
+                    <li><a href="admin.html">Admin</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Book Your Car</h1>
+                <p>Fill out the form below to reserve your vehicle</p>
+            </div>
+        </section>
+
+        <section class="booking-form">
+            <div class="container">
+                <form id="bookingForm" class="form-container">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="carSelect">Select Car</label>
+                            <select id="carSelect" name="carSelect" required>
+                                <option value="">Choose a car...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rentalType">Rental Duration</label>
+                            <select id="rentalType" name="rentalType" required>
+                                <option value="">Select duration...</option>
+                                <option value="hourly">Hourly</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="datetime-local" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <input type="datetime-local" id="endDate" name="endDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration (hours/days)</label>
+                        <input type="number" id="duration" name="duration" min="1" required>
+                    </div>
+
+                    <div class="price-summary">
+                        <h3>Price Summary</h3>
+                        <div class="price-details">
+                            <div class="price-line">
+                                <span>Base Rate:</span>
+                                <span id="baseRate">$0</span>
+                            </div>
+                            <div class="price-line">
+                                <span>Duration:</span>
+                                <span id="durationDisplay">0 days</span>
+                            </div>
+                            <div class="price-line total">
+                                <span>Total:</span>
+                                <span id="totalPrice">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">Book Now</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Raymells Car Hire</h3>
+                    <p>Your trusted partner for premium car rental services.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="cars.html">Our Cars</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="tracking.html">Track Car</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Email: info@raymellscarhire.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raymells Car Hire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

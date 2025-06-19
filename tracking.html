@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Car - Raymells Car Hire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>Raymells Car Hire</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cars.html">Our Cars</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
+                    <li><a href="tracking.html" class="active">Track Car</a></li>
+                    <li><a href="admin.html">Admin</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Track Your Rental Car</h1>
+                <p>Enter your booking ID to track your vehicle in real-time</p>
+            </div>
+        </section>
+
+        <section class="tracking-section">
+            <div class="container">
+                <div class="tracking-form">
+                    <div class="form-group">
+                        <label for="bookingId">Booking ID</label>
+                        <input type="text" id="bookingId" placeholder="Enter your booking ID (e.g., RCH-2024-001)">
+                        <button onclick="trackCar()" class="btn btn-primary">Track Car</button>
+                    </div>
+                </div>
+
+                <div id="trackingResults" class="tracking-results" style="display: none;">
+                    <div class="tracking-card">
+                        <h3>Booking Details</h3>
+                        <div class="booking-info">
+                            <div class="info-row">
+                                <span class="label">Booking ID:</span>
+                                <span id="displayBookingId">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Vehicle:</span>
+                                <span id="displayVehicle">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Customer:</span>
+                                <span id="displayCustomer">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Status:</span>
+                                <span id="displayStatus" class="status-badge">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracking-card">
+                        <h3>Current Location</h3>
+                        <div class="location-info">
+                            <div class="location-display">
+                                <div class="location-icon">📍</div>
+                                <div class="location-details">
+                                    <div class="address" id="currentAddress">Loading location...</div>
+                                    <div class="coordinates" id="currentCoordinates">-</div>
+                                </div>
+                            </div>
+                            <div class="map-placeholder">
+                                <div class="map-container">
+                                    <div class="map-marker">📍</div>
+                                    <p>Interactive map would be displayed here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracking-card">
+                        <h3>Trip Information</h3>
+                        <div class="trip-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="tripDistance">0 km</div>
+                                <div class="stat-label">Distance Traveled</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="tripDuration">0h 0m</div>
+                                <div class="stat-label">Trip Duration</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="fuelLevel">85%</div>
+                                <div class="stat-label">Fuel Level</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="avgSpeed">45 km/h</div>
+                                <div class="stat-label">Average Speed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="trackingError" class="error-message" style="display: none;">
+                    <p>Booking ID not found. Please check your booking ID and try again.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Raymells Car Hire</h3>
+                    <p>Your trusted partner for premium car rental services.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="cars.html">Our Cars</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="tracking.html">Track Car</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Email: info@raymellscarhire.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raymells Car Hire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
