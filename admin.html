@@ -7,208 +7,269 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <h2>Raymells Car Hire - Admin</h2>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Our Fleet</a></li>
-                    <li><a href="booking.html">Book Now</a></li>
-                    <li><a href="tracking.html">Track Vehicle</a></li>
-                    <li><a href="admin.html">Admin</a></li>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>Raymells Admin</h2>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" onclick="showSection('dashboard')">Dashboard</a></li>
+                    <li><a href="#vehicles" class="nav-link" onclick="showSection('vehicles')">Vehicles</a></li>
+                    <li><a href="#bookings" class="nav-link" onclick="showSection('bookings')">Bookings</a></li>
+                    <li><a href="#customers" class="nav-link" onclick="showSection('customers')">Customers</a></li>
+                    <li><a href="#reports" class="nav-link" onclick="showSection('reports')">Reports</a></li>
+                    <li><a href="index.html" class="nav-link">Back to Site</a></li>
                 </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </aside>
 
-    <div class="page-header">
-        <div class="container">
-            <h1>Admin Dashboard</h1>
-            <p>Manage your car hire business</p>
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <div class="admin-user">
+                    <span>Welcome, Admin</span>
+                    <button class="btn btn-small">Logout</button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="admin-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🚗</div>
+                            <div class="stat-info">
+                                <div class="stat-number">24</div>
+                                <div class="stat-label">Total Vehicles</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📋</div>
+                            <div class="stat-info">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Active Bookings</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-info">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Total Customers</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-info">
+                                <div class="stat-number">$12,450</div>
+                                <div class="stat-label">Monthly Revenue</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-charts">
+                        <div class="chart-card">
+                            <h3>Recent Bookings</h3>
+                            <div class="table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Booking ID</th>
+                                            <th>Customer</th>
+                                            <th>Vehicle</th>
+                                            <th>Status</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>RCH-2024-001</td>
+                                            <td>John Doe</td>
+                                            <td>Toyota Camry</td>
+                                            <td><span class="status-badge active">Active</span></td>
+                                            <td>$120</td>
+                                        </tr>
+                                        <tr>
+                                            <td>RCH-2024-002</td>
+                                            <td>Jane Smith</td>
+                                            <td>BMW X5</td>
+                                            <td><span class="status-badge completed">Completed</span></td>
+                                            <td>$280</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Vehicles Section -->
+                <section id="vehicles" class="admin-section">
+                    <div class="section-header">
+                        <h2>Vehicle Management</h2>
+                        <button class="btn btn-primary" onclick="showAddVehicleForm()">Add New Vehicle</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Make/Model</th>
+                                    <th>Class</th>
+                                    <th>Daily Rate</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehiclesTableBody">
+                                <!-- Vehicles will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Bookings Section -->
+                <section id="bookings" class="admin-section">
+                    <div class="section-header">
+                        <h2>Booking Management</h2>
+                        <div class="filter-controls">
+                            <select id="bookingStatusFilter">
+                                <option value="">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Customer</th>
+                                    <th>Vehicle</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsTableBody">
+                                <!-- Bookings will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Customers Section -->
+                <section id="customers" class="admin-section">
+                    <div class="section-header">
+                        <h2>Customer Management</h2>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Customer ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Total Bookings</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                <!-- Customers will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Reports Section -->
+                <section id="reports" class="admin-section">
+                    <div class="section-header">
+                        <h2>Reports & Analytics</h2>
+                    </div>
+                    
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <h3>Monthly Revenue</h3>
+                            <div class="report-chart">
+                                <div class="chart-placeholder">
+                                    <p>Revenue chart would be displayed here</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="report-card">
+                            <h3>Vehicle Utilization</h3>
+                            <div class="report-chart">
+                                <div class="chart-placeholder">
+                                    <p>Utilization chart would be displayed here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Vehicle Modal -->
+    <div id="addVehicleModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Vehicle</h3>
+                <span class="close" onclick="closeAddVehicleForm()">&times;</span>
+            </div>
+            <form id="addVehicleForm" class="modal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicleMake">Make</label>
+                        <input type="text" id="vehicleMake" name="make" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleModel">Model</label>
+                        <input type="text" id="vehicleModel" name="model" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicleYear">Year</label>
+                        <input type="number" id="vehicleYear" name="year" min="2000" max="2024" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleClass">Class</label>
+                        <select id="vehicleClass" name="class" required>
+                            <option value="">Select class...</option>
+                            <option value="economy">Economy</option>
+                            <option value="compact">Compact</option>
+                            <option value="suv">SUV</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dailyRate">Daily Rate ($)</label>
+                        <input type="number" id="dailyRate" name="dailyRate" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hourlyRate">Hourly Rate ($)</label>
+                        <input type="number" id="hourlyRate" name="hourlyRate" min="0" step="0.01" required>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddVehicleForm()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Vehicle</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <div class="page-content">
-        <div class="container">
-            <!-- Login Form (shown initially) -->
-            <div id="admin-login" class="form-container">
-                <h2>Admin Login</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="admin-username">Username:</label>
-                        <input type="text" id="admin-username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="admin-password">Password:</label>
-                        <input type="password" id="admin-password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-                </form>
-                <p style="margin-top: 1rem; text-align: center; color: #666;">
-                    Demo credentials: admin / password
-                </p>
-            </div>
-
-            <!-- Dashboard Content (hidden initially) -->
-            <div id="admin-dashboard" style="display: none;">
-                <div class="dashboard-grid">
-                    <div class="stat-card">
-                        <div class="stat-number" id="total-vehicles">0</div>
-                        <div class="stat-label">Total Vehicles</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="available-vehicles">0</div>
-                        <div class="stat-label">Available</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="rented-vehicles">0</div>
-                        <div class="stat-label">Currently Rented</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="total-bookings">0</div>
-                        <div class="stat-label">Total Bookings</div>
-                    </div>
-                </div>
-
-                <div class="admin-tabs">
-                    <button class="tab-btn active" data-tab="vehicles">Manage Vehicles</button>
-                    <button class="tab-btn" data-tab="bookings">View Bookings</button>
-                    <button class="tab-btn" data-tab="add-vehicle">Add Vehicle</button>
-                </div>
-
-                <!-- Vehicles Tab -->
-                <div id="vehicles-tab" class="tab-content active">
-                    <div class="card">
-                        <h3>Vehicle Fleet Management</h3>
-                        <div class="table-container">
-                            <table id="vehicles-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Make & Model</th>
-                                        <th>Category</th>
-                                        <th>Status</th>
-                                        <th>Daily Rate</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Vehicle data will be loaded here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bookings Tab -->
-                <div id="bookings-tab" class="tab-content">
-                    <div class="card">
-                        <h3>Recent Bookings</h3>
-                        <div class="table-container">
-                            <table id="bookings-table">
-                                <thead>
-                                    <tr>
-                                        <th>Booking ID</th>
-                                        <th>Customer</th>
-                                        <th>Vehicle</th>
-                                        <th>Duration</th>
-                                        <th>Total Price</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Booking data will be loaded here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Add Vehicle Tab -->
-                <div id="add-vehicle-tab" class="tab-content">
-                    <div class="card">
-                        <h3>Add New Vehicle</h3>
-                        <form id="add-vehicle-form">
-                            <div class="form-group">
-                                <label for="vehicle-make">Make:</label>
-                                <input type="text" id="vehicle-make" name="make" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="vehicle-model">Model:</label>
-                                <input type="text" id="vehicle-model" name="model" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="vehicle-year">Year:</label>
-                                <input type="number" id="vehicle-year" name="year" min="2000" max="2024" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="vehicle-category">Category:</label>
-                                <select id="vehicle-category" name="category" required>
-                                    <option value="">Select category...</option>
-                                    <option value="economy">Economy</option>
-                                    <option value="compact">Compact</option>
-                                    <option value="suv">SUV</option>
-                                    <option value="luxury">Luxury</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="vehicle-daily-rate">Daily Rate ($):</label>
-                                <input type="number" id="vehicle-daily-rate" name="dailyRate" min="1" step="0.01" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="vehicle-hourly-rate">Hourly Rate ($):</label>
-                                <input type="number" id="vehicle-hourly-rate" name="hourlyRate" min="1" step="0.01" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Add Vehicle</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button id="logout-btn" class="btn btn-secondary">Logout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Raymells Car Hire</h3>
-                    <p>Your trusted partner for premium car rental services.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="fleet.html">Our Fleet</a></li>
-                        <li><a href="booking.html">Book Now</a></li>
-                        <li><a href="tracking.html">Track Vehicle</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Phone: +1 (555) 123-4567</p>
-                    <p>Email: info@raymellscarhire.com</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Raymells Car Hire. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-client.js"></script>
-    <script src="admin.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

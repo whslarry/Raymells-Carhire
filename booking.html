@@ -15,9 +15,9 @@
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Our Fleet</a></li>
-                    <li><a href="booking.html">Book Now</a></li>
-                    <li><a href="tracking.html">Track Vehicle</a></li>
+                    <li><a href="cars.html">Our Cars</a></li>
+                    <li><a href="booking.html" class="active">Book Now</a></li>
+                    <li><a href="tracking.html">Track Car</a></li>
                     <li><a href="admin.html">Admin</a></li>
                 </ul>
                 <div class="hamburger">
@@ -29,76 +29,96 @@
         </nav>
     </header>
 
-    <div class="page-header">
-        <div class="container">
-            <h1>Book Your Vehicle</h1>
-            <p>Reserve your perfect car in just a few simple steps</p>
-        </div>
-    </div>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Book Your Car</h1>
+                <p>Fill out the form below to reserve your vehicle</p>
+            </div>
+        </section>
 
-    <div class="page-content">
-        <div class="container">
-            <div class="form-container">
-                <form id="booking-form">
-                    <div class="form-group">
-                        <label for="customer-name">Full Name:</label>
-                        <input type="text" id="customer-name" name="customerName" required>
+        <section class="booking-form">
+            <div class="container">
+                <form id="bookingForm" class="form-container">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="carSelect">Select Car</label>
+                            <select id="carSelect" name="carSelect" required>
+                                <option value="">Choose a car...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rentalType">Rental Duration</label>
+                            <select id="rentalType" name="rentalType" required>
+                                <option value="">Select duration...</option>
+                                <option value="hourly">Hourly</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="datetime-local" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <input type="datetime-local" id="endDate" name="endDate" required>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="customer-email">Email:</label>
-                        <input type="email" id="customer-email" name="customerEmail" required>
+                        <label for="duration">Duration (hours/days)</label>
+                        <input type="number" id="duration" name="duration" min="1" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="customer-phone">Phone Number:</label>
-                        <input type="tel" id="customer-phone" name="customerPhone" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="vehicle-select">Select Vehicle:</label>
-                        <select id="vehicle-select" name="vehicleId" required>
-                            <option value="">Choose a vehicle...</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rental-type">Rental Duration:</label>
-                        <select id="rental-type" name="rentalType" required>
-                            <option value="">Select duration...</option>
-                            <option value="hourly">Hourly</option>
-                            <option value="daily">Daily</option>
-                            <option value="weekly">Weekly</option>
-                            <option value="monthly">Monthly</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rental-duration">Duration:</label>
-                        <input type="number" id="rental-duration" name="rentalDuration" min="1" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pickup-date">Pickup Date:</label>
-                        <input type="datetime-local" id="pickup-date" name="pickupDate" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="return-date">Return Date:</label>
-                        <input type="datetime-local" id="return-date" name="returnDate" required>
-                    </div>
-
-                    <div id="price-summary" class="card" style="display: none;">
+                    <div class="price-summary">
                         <h3>Price Summary</h3>
-                        <div id="price-details"></div>
-                        <div id="total-price" style="font-size: 1.2rem; font-weight: bold; color: #ff6b35; margin-top: 1rem;"></div>
+                        <div class="price-details">
+                            <div class="price-line">
+                                <span>Base Rate:</span>
+                                <span id="baseRate">$0</span>
+                            </div>
+                            <div class="price-line">
+                                <span>Duration:</span>
+                                <span id="durationDisplay">0 days</span>
+                            </div>
+                            <div class="price-line total">
+                                <span>Total:</span>
+                                <span id="totalPrice">$0</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book Now</button>
+                    <button type="submit" class="btn btn-primary btn-large">Book Now</button>
                 </form>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
@@ -110,9 +130,9 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="fleet.html">Our Fleet</a></li>
+                        <li><a href="cars.html">Our Cars</a></li>
                         <li><a href="booking.html">Book Now</a></li>
-                        <li><a href="tracking.html">Track Vehicle</a></li>
+                        <li><a href="tracking.html">Track Car</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -127,9 +147,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-client.js"></script>
-    <script src="booking.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Fleet - Raymells Car Hire</title>
+    <title>Our Cars - Raymells Car Hire</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,9 +15,9 @@
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Our Fleet</a></li>
+                    <li><a href="cars.html" class="active">Our Cars</a></li>
                     <li><a href="booking.html">Book Now</a></li>
-                    <li><a href="tracking.html">Track Vehicle</a></li>
+                    <li><a href="tracking.html">Track Car</a></li>
                     <li><a href="admin.html">Admin</a></li>
                 </ul>
                 <div class="hamburger">
@@ -29,31 +29,42 @@
         </nav>
     </header>
 
-    <div class="page-header">
-        <div class="container">
-            <h1>Our Fleet</h1>
-            <p>Choose from our extensive collection of premium vehicles</p>
-        </div>
-    </div>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Our Vehicle Fleet</h1>
+                <p>Choose from our extensive collection of well-maintained vehicles</p>
+            </div>
+        </section>
 
-    <div class="page-content">
-        <div class="container">
-            <div class="filter-section">
-                <h3>Filter by Category:</h3>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-category="all">All Vehicles</button>
-                    <button class="filter-btn" data-category="economy">Economy</button>
-                    <button class="filter-btn" data-category="compact">Compact</button>
-                    <button class="filter-btn" data-category="suv">SUV</button>
-                    <button class="filter-btn" data-category="luxury">Luxury</button>
+        <section class="filters">
+            <div class="container">
+                <div class="filter-controls">
+                    <select id="classFilter">
+                        <option value="">All Classes</option>
+                        <option value="economy">Economy</option>
+                        <option value="compact">Compact</option>
+                        <option value="suv">SUV</option>
+                        <option value="luxury">Luxury</option>
+                    </select>
+                    <select id="priceFilter">
+                        <option value="">All Prices</option>
+                        <option value="0-50">$0 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100+">$100+</option>
+                    </select>
                 </div>
             </div>
+        </section>
 
-            <div id="fleet-grid" class="classes-grid">
-                <!-- Vehicles will be loaded here by JavaScript -->
+        <section class="cars-grid">
+            <div class="container">
+                <div id="carsContainer" class="cars-container">
+                    <!-- Cars will be populated by JavaScript -->
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
@@ -65,9 +76,9 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="fleet.html">Our Fleet</a></li>
+                        <li><a href="cars.html">Our Cars</a></li>
                         <li><a href="booking.html">Book Now</a></li>
-                        <li><a href="tracking.html">Track Vehicle</a></li>
+                        <li><a href="tracking.html">Track Car</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -82,9 +93,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-client.js"></script>
-    <script src="fleet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
