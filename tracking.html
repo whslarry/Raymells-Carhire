@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Track Your Car - Raymells Car Hire</title>
+    <title>Track Vehicle - Raymells Car Hire</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,9 +15,9 @@
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="cars.html">Our Cars</a></li>
+                    <li><a href="fleet.html">Our Fleet</a></li>
                     <li><a href="booking.html">Book Now</a></li>
-                    <li><a href="tracking.html" class="active">Track Car</a></li>
+                    <li><a href="tracking.html">Track Vehicle</a></li>
                     <li><a href="admin.html">Admin</a></li>
                 </ul>
                 <div class="hamburger">
@@ -29,95 +29,51 @@
         </nav>
     </header>
 
-    <main>
-        <section class="page-header">
-            <div class="container">
-                <h1>Track Your Rental Car</h1>
-                <p>Enter your booking ID to track your vehicle in real-time</p>
-            </div>
-        </section>
+    <div class="page-header">
+        <div class="container">
+            <h1>Track Your Vehicle</h1>
+            <p>Monitor your rental vehicle in real-time</p>
+        </div>
+    </div>
 
-        <section class="tracking-section">
-            <div class="container">
-                <div class="tracking-form">
+    <div class="page-content">
+        <div class="container">
+            <div class="form-container">
+                <form id="tracking-form">
                     <div class="form-group">
-                        <label for="bookingId">Booking ID</label>
-                        <input type="text" id="bookingId" placeholder="Enter your booking ID (e.g., RCH-2024-001)">
-                        <button onclick="trackCar()" class="btn btn-primary">Track Car</button>
+                        <label for="booking-id">Booking ID:</label>
+                        <input type="text" id="booking-id" name="bookingId" placeholder="Enter your booking ID" required>
                     </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Track Vehicle</button>
+                </form>
+            </div>
+
+            <div id="tracking-results" style="display: none;">
+                <div class="card">
+                    <h3>Vehicle Information</h3>
+                    <div id="vehicle-info"></div>
                 </div>
 
-                <div id="trackingResults" class="tracking-results" style="display: none;">
-                    <div class="tracking-card">
-                        <h3>Booking Details</h3>
-                        <div class="booking-info">
-                            <div class="info-row">
-                                <span class="label">Booking ID:</span>
-                                <span id="displayBookingId">-</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="label">Vehicle:</span>
-                                <span id="displayVehicle">-</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="label">Customer:</span>
-                                <span id="displayCustomer">-</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="label">Status:</span>
-                                <span id="displayStatus" class="status-badge">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tracking-card">
-                        <h3>Current Location</h3>
-                        <div class="location-info">
-                            <div class="location-display">
-                                <div class="location-icon">📍</div>
-                                <div class="location-details">
-                                    <div class="address" id="currentAddress">Loading location...</div>
-                                    <div class="coordinates" id="currentCoordinates">-</div>
-                                </div>
-                            </div>
-                            <div class="map-placeholder">
-                                <div class="map-container">
-                                    <div class="map-marker">📍</div>
-                                    <p>Interactive map would be displayed here</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tracking-card">
-                        <h3>Trip Information</h3>
-                        <div class="trip-stats">
-                            <div class="stat-item">
-                                <div class="stat-value" id="tripDistance">0 km</div>
-                                <div class="stat-label">Distance Traveled</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value" id="tripDuration">0h 0m</div>
-                                <div class="stat-label">Trip Duration</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value" id="fuelLevel">85%</div>
-                                <div class="stat-label">Fuel Level</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value" id="avgSpeed">45 km/h</div>
-                                <div class="stat-label">Average Speed</div>
+                <div class="card">
+                    <h3>Current Location</h3>
+                    <div id="location-info">
+                        <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; text-align: center; margin: 1rem 0;">
+                            <p>📍 GPS Tracking Map</p>
+                            <p style="color: #666; margin-top: 0.5rem;">Real-time location would be displayed here</p>
+                            <div style="background: #e9ecef; height: 200px; border-radius: 5px; margin-top: 1rem; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: #666;">Interactive Map View</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="trackingError" class="error-message" style="display: none;">
-                    <p>Booking ID not found. Please check your booking ID and try again.</p>
+                <div class="card">
+                    <h3>Rental Status</h3>
+                    <div id="rental-status"></div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
@@ -129,9 +85,9 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="cars.html">Our Cars</a></li>
+                        <li><a href="fleet.html">Our Fleet</a></li>
                         <li><a href="booking.html">Book Now</a></li>
-                        <li><a href="tracking.html">Track Car</a></li>
+                        <li><a href="tracking.html">Track Vehicle</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -146,6 +102,9 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+    <script src="tracking.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
