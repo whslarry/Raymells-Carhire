@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Cars - Raymells Car Hire</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Our Fleet - Raymells Car Hire</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/vehicles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <h2>Raymells Car Hire</h2>
+                    <h2><i class="fas fa-car"></i> Raymells Car Hire</h2>
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="cars.html" class="active">Our Cars</a></li>
+                    <li><a href="vehicles.html" class="active">Our Fleet</a></li>
+                    <li><a href="classes.html">Vehicle Classes</a></li>
                     <li><a href="booking.html">Book Now</a></li>
-                    <li><a href="tracking.html">Track Car</a></li>
-                    <li><a href="admin.html">Admin</a></li>
+                    <li><a href="tracking.html">Track Vehicle</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="admin/login.html" class="admin-link">Admin</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -29,11 +33,11 @@
         </nav>
     </header>
 
-    <main>
+    <main class="main-content">
         <section class="page-header">
             <div class="container">
                 <h1>Our Vehicle Fleet</h1>
-                <p>Choose from our extensive collection of well-maintained vehicles</p>
+                <p>Choose from our extensive collection of premium vehicles</p>
             </div>
         </section>
 
@@ -44,47 +48,51 @@
                         <option value="">All Classes</option>
                         <option value="economy">Economy</option>
                         <option value="compact">Compact</option>
-                        <option value="suv">SUV</option>
+                        <option value="midsize">Midsize</option>
                         <option value="luxury">Luxury</option>
+                        <option value="suv">SUV</option>
+                        <option value="van">Van</option>
                     </select>
                     <select id="priceFilter">
                         <option value="">All Prices</option>
                         <option value="0-50">$0 - $50</option>
                         <option value="50-100">$50 - $100</option>
-                        <option value="100+">$100+</option>
+                        <option value="100-200">$100 - $200</option>
+                        <option value="200+">$200+</option>
                     </select>
+                    <input type="text" id="searchInput" placeholder="Search vehicles...">
                 </div>
             </div>
         </section>
 
-        <section class="cars-grid">
+        <section class="vehicles-section">
             <div class="container">
-                <div id="carsContainer" class="cars-container">
-                    <!-- Cars will be populated by JavaScript -->
+                <div class="vehicles-grid" id="vehicles-grid">
+                    <!-- Vehicles will be loaded dynamically -->
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Raymells Car Hire</h3>
-                    <p>Your trusted partner for premium car rental services.</p>
+                    <p>Your trusted partner for premium car rental services</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="cars.html">Our Cars</a></li>
+                        <li><a href="vehicles.html">Our Fleet</a></li>
                         <li><a href="booking.html">Book Now</a></li>
-                        <li><a href="tracking.html">Track Car</a></li>
+                        <li><a href="tracking.html">Track Vehicle</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Phone: +1 (555) 123-4567</p>
-                    <p>Email: info@raymellscarhire.com</p>
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@raymellscarhire.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -93,6 +101,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/vehicles.js"></script>
 </body>
 </html>

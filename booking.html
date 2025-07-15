@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Now - Raymells Car Hire</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/booking.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <h2>Raymells Car Hire</h2>
+                    <h2><i class="fas fa-car"></i> Raymells Car Hire</h2>
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="cars.html">Our Cars</a></li>
+                    <li><a href="vehicles.html">Our Fleet</a></li>
+                    <li><a href="classes.html">Vehicle Classes</a></li>
                     <li><a href="booking.html" class="active">Book Now</a></li>
-                    <li><a href="tracking.html">Track Car</a></li>
-                    <li><a href="admin.html">Admin</a></li>
+                    <li><a href="tracking.html">Track Vehicle</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="admin/login.html" class="admin-link">Admin</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -29,116 +33,155 @@
         </nav>
     </header>
 
-    <main>
+    <main class="main-content">
         <section class="page-header">
             <div class="container">
-                <h1>Book Your Car</h1>
-                <p>Fill out the form below to reserve your vehicle</p>
+                <h1>Book Your Vehicle</h1>
+                <p>Reserve your perfect car in just a few simple steps</p>
             </div>
         </section>
 
-        <section class="booking-form">
+        <section class="booking-section">
             <div class="container">
-                <form id="bookingForm" class="form-container">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="carSelect">Select Car</label>
-                            <select id="carSelect" name="carSelect" required>
-                                <option value="">Choose a car...</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="rentalType">Rental Duration</label>
-                            <select id="rentalType" name="rentalType" required>
-                                <option value="">Select duration...</option>
-                                <option value="hourly">Hourly</option>
-                                <option value="daily">Daily</option>
-                                <option value="weekly">Weekly</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="startDate">Start Date</label>
-                            <input type="datetime-local" id="startDate" name="startDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="endDate">End Date</label>
-                            <input type="datetime-local" id="endDate" name="endDate" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="duration">Duration (hours/days)</label>
-                        <input type="number" id="duration" name="duration" min="1" required>
-                    </div>
-
-                    <div class="price-summary">
-                        <h3>Price Summary</h3>
-                        <div class="price-details">
-                            <div class="price-line">
-                                <span>Base Rate:</span>
-                                <span id="baseRate">$0</span>
+                <div class="booking-container">
+                    <div class="booking-form-container">
+                        <form id="booking-form" class="booking-form">
+                            <div class="form-step active" id="step1">
+                                <h3>Step 1: Select Dates & Duration</h3>
+                                <div class="form-group">
+                                    <label for="pickup-date">Pickup Date</label>
+                                    <input type="date" id="pickup-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pickup-time">Pickup Time</label>
+                                    <input type="time" id="pickup-time" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rental-duration">Rental Duration</label>
+                                    <select id="rental-duration" required>
+                                        <option value="">Select Duration</option>
+                                        <option value="hourly">Hourly</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="duration-details" style="display: none;">
+                                    <label for="duration-amount">Duration Amount</label>
+                                    <input type="number" id="duration-amount" min="1" placeholder="Enter number">
+                                </div>
+                                <button type="button" class="btn btn-primary next-step">Next Step</button>
                             </div>
-                            <div class="price-line">
-                                <span>Duration:</span>
-                                <span id="durationDisplay">0 days</span>
+
+                            <div class="form-step" id="step2">
+                                <h3>Step 2: Choose Vehicle</h3>
+                                <div class="vehicle-selection" id="vehicle-selection">
+                                    <!-- Vehicles will be loaded dynamically -->
+                                </div>
+                                <div class="step-buttons">
+                                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                                    <button type="button" class="btn btn-primary next-step">Next Step</button>
+                                </div>
                             </div>
-                            <div class="price-line total">
-                                <span>Total:</span>
-                                <span id="totalPrice">$0</span>
+
+                            <div class="form-step" id="step3">
+                                <h3>Step 3: Customer Information</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="first-name">First Name</label>
+                                        <input type="text" id="first-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name">Last Name</label>
+                                        <input type="text" id="last-name" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="license">Driver's License Number</label>
+                                    <input type="text" id="license" required>
+                                </div>
+                                <div class="step-buttons">
+                                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                                    <button type="button" class="btn btn-primary next-step">Review Booking</button>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-step" id="step4">
+                                <h3>Step 4: Review & Confirm</h3>
+                                <div class="booking-summary" id="booking-summary">
+                                    <!-- Summary will be generated dynamically -->
+                                </div>
+                                <div class="step-buttons">
+                                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-large">Book Now</button>
-                </form>
+                    <div class="pricing-info">
+                        <h3>Pricing Information</h3>
+                        <div class="pricing-table">
+                            <div class="pricing-row">
+                                <span>Hourly Rate</span>
+                                <span>$8 - $25/hour</span>
+                            </div>
+                            <div class="pricing-row">
+                                <span>Daily Rate</span>
+                                <span>$25 - $200/day</span>
+                            </div>
+                            <div class="pricing-row">
+                                <span>Weekly Rate</span>
+                                <span>$150 - $1200/week</span>
+                            </div>
+                            <div class="pricing-row">
+                                <span>Monthly Rate</span>
+                                <span>$500 - $4000/month</span>
+                            </div>
+                        </div>
+                        <div class="pricing-notes">
+                            <h4>Additional Information:</h4>
+                            <ul>
+                                <li>Insurance included in all rates</li>
+                                <li>24/7 roadside assistance</li>
+                                <li>GPS tracking available</li>
+                                <li>Fuel policy: Return with same level</li>
+                                <li>Late return fees may apply</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Raymells Car Hire</h3>
-                    <p>Your trusted partner for premium car rental services.</p>
+                    <p>Your trusted partner for premium car rental services</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="cars.html">Our Cars</a></li>
+                        <li><a href="vehicles.html">Our Fleet</a></li>
                         <li><a href="booking.html">Book Now</a></li>
-                        <li><a href="tracking.html">Track Car</a></li>
+                        <li><a href="tracking.html">Track Vehicle</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Phone: +1 (555) 123-4567</p>
-                    <p>Email: info@raymellscarhire.com</p>
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@raymellscarhire.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -147,6 +190,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/booking.js"></script>
 </body>
 </html>

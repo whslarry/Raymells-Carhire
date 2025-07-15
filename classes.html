@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Classes - Raymells Car Hire</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/classes.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-car"></i> Raymells Car Hire</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vehicles.html">Our Fleet</a></li>
+                    <li><a href="classes.html" class="active">Vehicle Classes</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
+                    <li><a href="tracking.html">Track Vehicle</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="admin/login.html" class="admin-link">Admin</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="page-header">
+            <div class="container">
+                <h1>Vehicle Classes</h1>
+                <p>Find the perfect vehicle class for your needs</p>
+            </div>
+        </section>
+
+        <section class="classes-section">
+            <div class="container">
+                <div class="classes-grid">
+                    <div class="class-card">
+                        <div class="class-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Economy</h3>
+                        <p class="class-description">Perfect for city driving and budget-conscious travelers</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check"></i> Fuel efficient</li>
+                            <li><i class="fas fa-check"></i> Easy parking</li>
+                            <li><i class="fas fa-check"></i> 4-5 passengers</li>
+                            <li><i class="fas fa-check"></i> Manual/Automatic</li>
+                        </ul>
+                        <div class="class-price">From $25/day</div>
+                        <a href="vehicles.html?class=economy" class="btn btn-primary">View Vehicles</a>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-icon">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <h3>Compact</h3>
+                        <p class="class-description">Great balance of comfort and efficiency</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check"></i> Comfortable seating</li>
+                            <li><i class="fas fa-check"></i> Good fuel economy</li>
+                            <li><i class="fas fa-check"></i> 4-5 passengers</li>
+                            <li><i class="fas fa-check"></i> Air conditioning</li>
+                        </ul>
+                        <div class="class-price">From $35/day</div>
+                        <a href="vehicles.html?class=compact" class="btn btn-primary">View Vehicles</a>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-icon">
+                            <i class="fas fa-car-alt"></i>
+                        </div>
+                        <h3>Midsize</h3>
+                        <p class="class-description">Spacious and comfortable for longer trips</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check"></i> Spacious interior</li>
+                            <li><i class="fas fa-check"></i> Large trunk</li>
+                            <li><i class="fas fa-check"></i> 5 passengers</li>
+                            <li><i class="fas fa-check"></i> Premium features</li>
+                        </ul>
+                        <div class="class-price">From $45/day</div>
+                        <a href="vehicles.html?class=midsize" class="btn btn-primary">View Vehicles</a>
+                    </div>
+
+                    <div class="class-card featured">
+                        <div class="class-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Luxury</h3>
+                        <p class="class-description">Premium vehicles for special occasions</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check"></i> Premium materials</li>
+                            <li><i class="fas fa-check"></i> Advanced technology</li>
+                            <li><i class="fas fa-check"></i> Superior comfort</li>
+                            <li><i class="fas fa-check"></i> Prestige brands</li>
+                        </ul>
+                        <div class="class-price">From $120/day</div>
+                        <a href="vehicles.html?class=luxury" class="btn btn-primary">View Vehicles</a>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>SUV</h3>
+                        <p class="class-description">Perfect for families and adventure seekers</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check"></i> High seating position</li>
+                            <li><i class="fas fa-check"></i> All-wheel drive</li>
+                            <li><i class="fas fa-check"></i> 7-8 passengers</li>
+                            <li><i class="fas fa-check"></i> Cargo space</li>
+                        </ul>
+                        <div class="class-price">From $65/day</div>
+                        <a href="vehicles.html?class=suv" class="btn btn-primary">View Vehicles</a>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-icon">
+                            <i class="fas fa-shuttle-van"></i>
+                        </div>
+                        <h3>Van</h3>
+                        <p class="class-description">Ideal for group travel and cargo transport</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check"></i> Maximum space</li>
+                            <li><i class="fas fa-check"></i> 8-15 passengers</li>
+                            <li><i class="fas fa-check"></i> Sliding doors</li>
+                            <li><i class="fas fa-check"></i> Commercial use</li>
+                        </ul>
+                        <div class="class-price">From $85/day</div>
+                        <a href="vehicles.html?class=van" class="btn btn-primary">View Vehicles</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Raymells Car Hire</h3>
+                    <p>Your trusted partner for premium car rental services</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="vehicles.html">Our Fleet</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="tracking.html">Track Vehicle</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@raymellscarhire.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raymells Car Hire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

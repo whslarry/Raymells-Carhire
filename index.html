@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raymells Car Hire - Premium Car Rental Services</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <h2>Raymells Car Hire</h2>
+                    <h2><i class="fas fa-car"></i> Raymells Car Hire</h2>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="cars.html">Our Cars</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="vehicles.html">Our Fleet</a></li>
+                    <li><a href="classes.html">Vehicle Classes</a></li>
                     <li><a href="booking.html">Book Now</a></li>
-                    <li><a href="tracking.html">Track Car</a></li>
-                    <li><a href="admin.html">Admin</a></li>
+                    <li><a href="tracking.html">Track Vehicle</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="admin/login.html" class="admin-link">Admin</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -30,13 +33,14 @@
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
                 <h1>Premium Car Rental Services</h1>
-                <p>Experience luxury and comfort with our wide range of vehicles. From economy cars to luxury SUVs, we have the perfect car for every occasion.</p>
+                <p>Experience luxury and comfort with our extensive fleet of well-maintained vehicles</p>
                 <div class="hero-buttons">
-                    <a href="cars.html" class="btn btn-primary">View Our Fleet</a>
-                    <a href="booking.html" class="btn btn-secondary">Book Now</a>
+                    <a href="booking.html" class="btn btn-primary">Book Now</a>
+                    <a href="vehicles.html" class="btn btn-secondary">View Fleet</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -44,86 +48,68 @@
             </div>
         </section>
 
+        <!-- Features Section -->
         <section class="features">
             <div class="container">
                 <h2>Why Choose Raymells Car Hire?</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">🚗</div>
-                        <h3>Wide Selection</h3>
-                        <p>Choose from our extensive fleet of economy, luxury, and specialty vehicles.</p>
+                        <i class="fas fa-car-side"></i>
+                        <h3>Premium Fleet</h3>
+                        <p>Wide selection of luxury and economy vehicles</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">💰</div>
-                        <h3>Competitive Prices</h3>
-                        <p>Best rates in the market with flexible hourly and daily rental options.</p>
+                        <i class="fas fa-clock"></i>
+                        <h3>Flexible Rental</h3>
+                        <p>Hourly, daily, weekly, and monthly options</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">📍</div>
-                        <h3>Real-time Tracking</h3>
-                        <p>Track your rental car in real-time for added security and peace of mind.</p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>GPS Tracking</h3>
+                        <p>Real-time vehicle tracking for your peace of mind</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">🔧</div>
+                        <i class="fas fa-headset"></i>
                         <h3>24/7 Support</h3>
-                        <p>Round-the-clock customer support and roadside assistance.</p>
+                        <p>Round-the-clock customer assistance</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="vehicle-classes">
+        <!-- Popular Cars Section -->
+        <section class="popular-cars">
             <div class="container">
-                <h2>Vehicle Classes</h2>
-                <div class="classes-grid">
-                    <div class="class-card">
-                        <img src="/placeholder.svg?height=200&width=300" alt="Economy Car">
-                        <h3>Economy</h3>
-                        <p>Perfect for city driving and budget-conscious travelers.</p>
-                        <div class="price">From $25/day</div>
-                    </div>
-                    <div class="class-card">
-                        <img src="/placeholder.svg?height=200&width=300" alt="Compact Car">
-                        <h3>Compact</h3>
-                        <p>Ideal balance of comfort and fuel efficiency.</p>
-                        <div class="price">From $35/day</div>
-                    </div>
-                    <div class="class-card">
-                        <img src="/placeholder.svg?height=200&width=300" alt="SUV">
-                        <h3>SUV</h3>
-                        <p>Spacious and powerful for family trips and adventures.</p>
-                        <div class="price">From $65/day</div>
-                    </div>
-                    <div class="class-card">
-                        <img src="/placeholder.svg?height=200&width=300" alt="Luxury Car">
-                        <h3>Luxury</h3>
-                        <p>Premium vehicles for special occasions and business.</p>
-                        <div class="price">From $120/day</div>
-                    </div>
+                <h2>Popular Vehicles</h2>
+                <div class="cars-grid" id="popular-cars">
+                    <!-- Cars will be loaded dynamically -->
+                </div>
+                <div class="text-center">
+                    <a href="vehicles.html" class="btn btn-primary">View All Vehicles</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Raymells Car Hire</h3>
-                    <p>Your trusted partner for premium car rental services.</p>
+                    <p>Your trusted partner for premium car rental services</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="cars.html">Our Cars</a></li>
+                        <li><a href="vehicles.html">Our Fleet</a></li>
                         <li><a href="booking.html">Book Now</a></li>
-                        <li><a href="tracking.html">Track Car</a></li>
+                        <li><a href="tracking.html">Track Vehicle</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Phone: +1 (555) 123-4567</p>
-                    <p>Email: info@raymellscarhire.com</p>
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@raymellscarhire.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -132,6 +118,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

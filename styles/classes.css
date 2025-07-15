@@ -1,0 +1,94 @@
+.classes-section {
+  padding: 60px 0;
+  background: #f8f9fa;
+}
+
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.class-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.class-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.class-card.featured {
+  border: 3px solid #2c5aa0;
+  transform: scale(1.05);
+}
+
+.class-card.featured::before {
+  content: "Most Popular";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c5aa0;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.class-icon {
+  font-size: 4rem;
+  color: #2c5aa0;
+  margin-bottom: 1rem;
+}
+
+.class-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.class-description {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.class-features {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.class-features li {
+  padding: 0.5rem 0;
+  color: #555;
+}
+
+.class-features i {
+  color: #28a745;
+  margin-right: 0.5rem;
+}
+
+.class-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c5aa0;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .class-card.featured {
+    transform: none;
+  }
+}
