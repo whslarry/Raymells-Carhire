@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicles Management - Raymells Car Hire</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        window.NEXT_PUBLIC_SUPABASE_URL = window.NEXT_PUBLIC_SUPABASE_URL || '';
+        window.NEXT_PUBLIC_SUPABASE_ANON_KEY = window.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+    </script>
+</head>
+<body class="admin-body">
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-car"></i> Raymells Admin</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="vehicles-management.html" class="active"><i class="fas fa-car"></i> Vehicles</a></li>
+                    <li><a href="bookings-management.html"><i class="fas fa-calendar"></i> Bookings</a></li>
+                    <li><a href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                    <li><a href="tracking-admin.html"><i class="fas fa-map-marker-alt"></i> Vehicle Tracking</a></li>
+                    <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Vehicle Management</h1>
+                <button class="btn btn-primary" onclick="showAddVehicleModal()">
+                    <i class="fas fa-plus"></i> Add Vehicle
+                </button>
+            </header>
+
+            <div class="admin-content">
+                <div class="admin-card">
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>Year</th>
+                                    <th>Status</th>
+                                    <th>Daily Rate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehicles-table">
+                                <tr><td colspan="6" style="text-align:center;">Loading vehicles...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Vehicle Modal -->
+    <div class="modal" id="vehicle-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add/Edit Vehicle</h2>
+                <button class="modal-close" onclick="closeVehicleModal()">&times;</button>
+            </div>
+            <form id="vehicle-form" class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-name">Vehicle Name</label>
+                        <input type="text" id="vehicle-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-class">Class</label>
+                        <select id="vehicle-class" required>
+                            <option value="">Select Class</option>
+                            <option value="Economy">Economy</option>
+                            <option value="Standard">Standard</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="SUV">SUV</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-year">Year</label>
+                        <input type="number" id="vehicle-year" min="2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-fuel">Fuel Type</label>
+                        <select id="vehicle-fuel" required>
+                            <option value="">Select Fuel</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Hybrid">Hybrid</option>
+                            <option value="Electric">Electric</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-hourly">Hourly Rate ($)</label>
+                        <input type="number" id="vehicle-hourly" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-daily">Daily Rate ($)</label>
+                        <input type="number" id="vehicle-daily" min="0" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-weekly">Weekly Rate ($)</label>
+                        <input type="number" id="vehicle-weekly" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-monthly">Monthly Rate ($)</label>
+                        <input type="number" id="vehicle-monthly" min="0" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="vehicle-features">Features (comma-separated)</label>
+                    <input type="text" id="vehicle-features" placeholder="e.g., GPS, AC, Power Steering">
+                </div>
+
+                <div class="form-group">
+                    <label for="vehicle-status">Status</label>
+                    <select id="vehicle-status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeVehicleModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Vehicle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="../scripts/admin-vehicles.js"></script>
+</body>
+</html>

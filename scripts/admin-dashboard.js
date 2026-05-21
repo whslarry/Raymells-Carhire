@@ -1,158 +1,241 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Check if admin is logged in
-  if (!sessionStorage.getItem("adminLoggedIn")) {
-    window.location.href = "login.html"
-    return
+import { initializeSupabase, supabase } from './supabase.js';
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', async () => {
+  await initializeSupabase();
+  await checkAdminAuth();
+  await loadDashboardData();
+});
+
+// State
+let revenueChart = null;
+
+/**
+ * Check if user is authenticated as admin
+ */
+async function checkAdminAuth() {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Check if user is admin
+    const { data: admin } = await supabase
+      .from('admins')
+      .select('*')
+      .eq('user_id', session.user.id)
+      .single();
+
+    if (!admin) {
+      window.location.href = '../index.html';
+    }
+  } catch (error) {
+    console.error('[v0] Admin auth check error:', error);
+    window.location.href = 'login.html';
   }
+}
 
-  loadDashboardData()
-
-  function loadDashboardData() {
-    // Load statistics
-    loadStatistics()
-
-    // Load recent bookings
-    loadRecentBookings()
-
-    // Load vehicle status
-    loadVehicleStatus()
-
-    // Initialize revenue chart
-    initializeRevenueChart()
+/**
+ * Load all dashboard data
+ */
+async function loadDashboardData() {
+  try {
+    await Promise.all([
+      loadStatistics(),
+      loadRecentBookings(),
+      loadVehicleStatus(),
+      initializeRevenueChart()
+    ]);
+  } catch (error) {
+    console.error('[v0] Dashboard data load error:', error);
   }
+}
 
-  function loadStatistics() {
-    const vehicles = window.vehiclesData || []
-    const bookings = getFromLocalStorage("bookings") || []
-    const customers = getUniqueCustomers(bookings)
-    const monthlyRevenue = calculateMonthlyRevenue(bookings)
+/**
+ * Load statistics
+ */
+async function loadStatistics() {
+  try {
+    // Get vehicle count
+    const { data: vehicles, count: vehicleCount } = await supabase
+      .from('vehicles')
+      .select('*', { count: 'exact' });
 
-    document.getElementById("total-vehicles").textContent = vehicles.length
-    document.getElementById("active-bookings").textContent = bookings.length
-    document.getElementById("total-customers").textContent = customers.length
-    document.getElementById("monthly-revenue").textContent = formatPrice(monthlyRevenue)
+    // Get active bookings
+    const { count: activeBookingsCount } = await supabase
+      .from('bookings')
+      .select('*', { count: 'exact' })
+      .eq('status', 'confirmed');
+
+    // Get customer count
+    const { count: customerCount } = await supabase
+      .from('customer_profiles')
+      .select('*', { count: 'exact' });
+
+    // Calculate monthly revenue
+    const { data: monthlyBookings } = await supabase
+      .from('bookings')
+      .select('total_price, pickup_date')
+      .gte('pickup_date', new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString());
+
+    const monthlyRevenue = (monthlyBookings || []).reduce((sum, b) => sum + (b.total_price || 0), 0);
+
+    // Update UI
+    document.getElementById('total-vehicles').textContent = vehicleCount || 0;
+    document.getElementById('active-bookings').textContent = activeBookingsCount || 0;
+    document.getElementById('total-customers').textContent = customerCount || 0;
+    document.getElementById('monthly-revenue').textContent = `$${monthlyRevenue.toFixed(2)}`;
+  } catch (error) {
+    console.error('[v0] Statistics load error:', error);
   }
+}
 
-  function loadRecentBookings() {
-    const bookings = getFromLocalStorage("bookings") || []
-    const recentBookings = bookings.slice(-5).reverse()
+/**
+ * Load recent bookings
+ */
+async function loadRecentBookings() {
+  try {
+    const { data: bookings } = await supabase
+      .from('bookings')
+      .select('id, booking_ref, pickup_date, status, customer_profiles(full_name), vehicles(name)')
+      .order('pickup_date', { ascending: false })
+      .limit(5);
 
-    const tbody = document.getElementById("recent-bookings")
-    tbody.innerHTML = recentBookings
-      .map(
-        (booking) => `
-            <tr>
-                <td>${booking.bookingId}</td>
-                <td>${booking.firstName} ${booking.lastName}</td>
-                <td>${booking.selectedVehicle.name}</td>
-                <td>${new Date(booking.createdAt).toLocaleDateString()}</td>
-                <td><span class="status-badge ${booking.status}">${booking.status}</span></td>
-            </tr>
-        `,
-      )
-      .join("")
+    const tbody = document.getElementById('recent-bookings');
+    
+    if (!bookings || bookings.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No bookings yet</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = bookings
+      .map(booking => `
+        <tr>
+          <td>${booking.booking_ref}</td>
+          <td>${booking.customer_profiles?.full_name || 'N/A'}</td>
+          <td>${booking.vehicles?.name || 'N/A'}</td>
+          <td>${new Date(booking.pickup_date).toLocaleDateString()}</td>
+          <td><span class="status-badge ${booking.status}">${booking.status}</span></td>
+        </tr>
+      `)
+      .join('');
+  } catch (error) {
+    console.error('[v0] Recent bookings load error:', error);
   }
+}
 
-  function loadVehicleStatus() {
-    const vehicles = window.vehiclesData || []
-    const container = document.getElementById("vehicle-status")
+/**
+ * Load vehicle status
+ */
+async function loadVehicleStatus() {
+  try {
+    const { data: vehicles } = await supabase
+      .from('vehicles')
+      .select('id, name, class, status')
+      .limit(6);
+
+    const container = document.getElementById('vehicle-status');
+
+    if (!vehicles || vehicles.length === 0) {
+      container.innerHTML = '<p>No vehicles available</p>';
+      return;
+    }
 
     container.innerHTML = vehicles
-      .map(
-        (vehicle) => `
-            <div class="vehicle-status-item">
-                <div class="vehicle-info">
-                    <h4>${vehicle.name}</h4>
-                    <p>${vehicle.class}</p>
-                </div>
-                <div class="status-indicator ${vehicle.available ? "available" : "rented"}">
-                    ${vehicle.available ? "Available" : "Rented"}
-                </div>
-            </div>
-        `,
-      )
-      .join("")
+      .map(vehicle => `
+        <div class="vehicle-status-item">
+          <div class="vehicle-info">
+            <h4>${vehicle.name}</h4>
+            <p>${vehicle.class}</p>
+          </div>
+          <div class="status-indicator ${vehicle.status === 'active' ? 'available' : 'rented'}">
+            ${vehicle.status === 'active' ? 'Available' : 'Rented'}
+          </div>
+        </div>
+      `)
+      .join('');
+  } catch (error) {
+    console.error('[v0] Vehicle status load error:', error);
   }
+}
 
-  function getUniqueCustomers(bookings) {
-    const customers = new Set()
-    bookings.forEach((booking) => {
-      customers.add(booking.email)
-    })
-    return Array.from(customers)
-  }
+/**
+ * Initialize revenue chart
+ */
+async function initializeRevenueChart() {
+  try {
+    const canvas = document.getElementById('revenue-chart');
+    if (!canvas) return;
 
-  function calculateMonthlyRevenue(bookings) {
-    const currentMonth = new Date().getMonth()
-    const currentYear = new Date().getFullYear()
+    // Get last 6 months of revenue
+    const months = [];
+    const revenues = [];
+    const now = new Date();
 
-    return bookings
-      .filter((booking) => {
-        const bookingDate = new Date(booking.createdAt)
-        return bookingDate.getMonth() === currentMonth && bookingDate.getFullYear() === currentYear
-      })
-      .reduce((total, booking) => {
-        const basePrice = getPriceForDuration(booking.selectedVehicle, booking.rentalDuration)
-        return total + basePrice * Number.parseInt(booking.durationAmount)
-      }, 0)
-  }
+    for (let i = 5; i >= 0; i--) {
+      const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const nextDate = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
+      
+      months.push(date.toLocaleString('default', { month: 'short' }));
 
-  function initializeRevenueChart() {
-    // Simple chart implementation (in real app, use Chart.js or similar)
-    const canvas = document.getElementById("revenue-chart")
-    const ctx = canvas.getContext("2d")
+      // Get bookings for this month
+      const { data: monthBookings } = await supabase
+        .from('bookings')
+        .select('total_price')
+        .gte('pickup_date', date.toISOString())
+        .lt('pickup_date', nextDate.toISOString());
 
-    // Sample data for demonstration
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-    const revenue = [5000, 7500, 6200, 8900, 9500, 11200]
-
-    // Simple bar chart
-    canvas.width = 400
-    canvas.height = 200
-
-    const barWidth = 50
-    const barSpacing = 10
-    const maxRevenue = Math.max(...revenue)
-
-    ctx.fillStyle = "#2c5aa0"
-
-    revenue.forEach((value, index) => {
-      const barHeight = (value / maxRevenue) * 150
-      const x = index * (barWidth + barSpacing) + 20
-      const y = 180 - barHeight
-
-      ctx.fillRect(x, y, barWidth, barHeight)
-
-      // Draw labels
-      ctx.fillStyle = "#333"
-      ctx.font = "12px Arial"
-      ctx.fillText(months[index], x + 15, 195)
-      ctx.fillText("$" + value / 1000 + "k", x + 10, y - 5)
-      ctx.fillStyle = "#2c5aa0"
-    })
-  }
-
-  function getPriceForDuration(vehicle, duration) {
-    switch (duration) {
-      case "hourly":
-        return vehicle.pricePerHour
-      case "daily":
-        return vehicle.pricePerDay
-      case "weekly":
-        return vehicle.pricePerWeek
-      case "monthly":
-        return vehicle.pricePerMonth
-      default:
-        return vehicle.pricePerDay
+      const monthRevenue = (monthBookings || []).reduce((sum, b) => sum + (b.total_price || 0), 0);
+      revenues.push(monthRevenue);
     }
-  }
 
-  function getFromLocalStorage(key) {
-    const data = localStorage.getItem(key)
-    return data ? JSON.parse(data) : null
-  }
+    // Create chart
+    const ctx = canvas.getContext('2d');
+    
+    if (revenueChart) {
+      revenueChart.destroy();
+    }
 
-  function formatPrice(price) {
-    return `$${price.toFixed(2)}`
+    revenueChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Monthly Revenue',
+          data: revenues,
+          backgroundColor: '#2c5aa0',
+          borderColor: '#1e4070',
+          borderWidth: 1,
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return '$' + (value / 1000).toFixed(0) + 'k';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Set canvas height
+    canvas.style.height = '300px';
+  } catch (error) {
+    console.error('[v0] Revenue chart error:', error);
   }
-})
+}
