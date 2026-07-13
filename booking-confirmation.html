@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - Raymells Car Hire</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/confirmation.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        window.NEXT_PUBLIC_SUPABASE_URL = window.NEXT_PUBLIC_SUPABASE_URL || '';
+        window.NEXT_PUBLIC_SUPABASE_ANON_KEY = window.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-car"></i> Raymells Car Hire</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vehicles.html">Our Fleet</a></li>
+                    <li><a href="classes.html">Vehicle Classes</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
+                    <li><a href="tracking.html">Track Vehicle</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="admin/login.html" class="admin-link">Admin</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="confirmation-section">
+            <div class="container">
+                <div class="confirmation-container">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    
+                    <h1>Booking Confirmed!</h1>
+                    <p class="confirmation-message">Your car rental booking has been successfully created.</p>
+                    
+                    <div class="booking-details" id="booking-details">
+                        <div class="detail-section">
+                            <h3>Booking Reference</h3>
+                            <p class="reference-number" id="booking-ref">BK...</p>
+                            <button class="btn btn-secondary" onclick="copyToClipboard()">Copy Reference</button>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Vehicle Details</h3>
+                            <div id="vehicle-info">Loading...</div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Rental Period</h3>
+                            <div id="rental-info">Loading...</div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>Total Cost</h3>
+                            <p class="total-price" id="total-price">$0.00</p>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3>What's Next?</h3>
+                            <ul class="next-steps">
+                                <li><i class="fas fa-envelope"></i> Check your email for booking confirmation</li>
+                                <li><i class="fas fa-mobile-alt"></i> You'll receive pickup instructions via SMS</li>
+                                <li><i class="fas fa-map-location-dot"></i> Visit our office on pickup date</li>
+                                <li><i class="fas fa-smartphone"></i> Track your vehicle in real-time</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="tracking.html" class="btn btn-primary">Track Vehicle</a>
+                        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3>Need Help?</h3>
+                    <p>If you have any questions about your booking, please contact us:</p>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@raymellscarhire.com">info@raymellscarhire.com</a></li>
+                        <li><i class="fas fa-clock"></i> Available 24/7</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Raymells Car Hire</h3>
+                    <p>Your trusted partner for premium car rental services</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="vehicles.html">Our Fleet</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="tracking.html">Track Vehicle</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@raymellscarhire.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raymells Car Hire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/confirmation.js"></script>
+</body>
+</html>

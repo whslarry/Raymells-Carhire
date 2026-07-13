@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/tracking.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        window.NEXT_PUBLIC_SUPABASE_URL = window.NEXT_PUBLIC_SUPABASE_URL || '';
+        window.NEXT_PUBLIC_SUPABASE_ANON_KEY = window.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+    </script>
 </head>
 <body>
     <header class="header">
@@ -126,7 +132,7 @@
         </div>
     </footer>
 
-    <script src="scripts/main.js"></script>
-    <script src="scripts/tracking.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/tracking.js"></script>
 </body>
 </html>
